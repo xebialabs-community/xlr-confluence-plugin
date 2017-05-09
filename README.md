@@ -1,3 +1,5 @@
-# FROM-TO-plugin v1.0.0
+# xlr-confluence-plugin v1.0.0
 
-Insert description here# xlr-confluence-plugin
+Adds a comment to one or more existing Confluence Wiki pages.
+
+An add-page function is under construction.
