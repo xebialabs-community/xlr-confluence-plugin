@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+    FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+
+-->
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <type type="confluence.Server" extends="configuration.HttpConnection" >
+    <property name="checkConfigurationPath" hidden="true" default="/" />
+    <property name="scriptLocation" hidden="true" default="configuration/HttpConnectionCheck.py"/>
+  </type>
+
+  <type type="confluence.addCommentToWikiPages" extends="xlrelease.PythonScript">
+    <property name="confluenceServer" category="input" label="Server" referenced-type="confluence.Server" kind="ci" />
+    <property name="spaceKey" category="input" />
+    <property name="pageTitles" category="input" kind="list_of_string" />
+    <property name="pageNumbers" category="input" kind="list_of_string" />
+    <property name="comment" category="input" />
+  </type>
+
+</synthetic>
