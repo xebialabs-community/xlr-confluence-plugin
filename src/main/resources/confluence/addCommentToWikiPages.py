@@ -37,4 +37,3 @@ for pageId in pageIdList:
   request = HttpRequestPlus(confluenceServer)
   response = request.post('/rest/api/content', json.dumps(payload), contentType=contentType, headers=headers)
 
-sys.exit(1)
