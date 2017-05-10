@@ -6,7 +6,7 @@
 
 from confluence.ConfluenceClientUtil import ConfluenceClientUtil
 
-print "Executing addCommentToPages.py\n"
+print "Executing addWikiPages.py\n"
 
 if confluenceServer is None:
   print "No server provided\n"
@@ -16,10 +16,10 @@ credentials = CredentialsFallback(confluenceServer, username, password).getCrede
 
 confluenceClient = ConfluenceClientUtil.createConfluenceClient(confluenceServer, credentials['username'], credentials['password'])
 
-pageIdList = confluenceClient.getPageNumbersByTitle(spaceKey, pageTitles)
+parentPageIdList = confluenceClient.getPageNumbersByTitle(spaceKey, parentPageTitles)
 
-for pageNumber in pageNumbers:
-  pageIdList.append(pageNumber)
+for parentPageNumber in parentPageNumbers:
+  parentPageIdList.append(parentPageNumber)
 
-for pageId in pageIdList:
-  confluenceClient.addComment(pageId, comment)
+for parentPageId in parentPageIdList:
+  confluenceClient.addPage(spaceKey, parentPageId, pageTitle, pageText)

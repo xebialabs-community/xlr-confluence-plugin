@@ -1,5 +1,7 @@
 # xlr-confluence-plugin v1.0.0
 
-Adds a comment to one or more existing Confluence Wiki pages.
+Functionality:
 
-An add-page function is under construction.
+* Adds a comment to one or more existing wiki pages
+* Adds new wiki page under one or more existing parent wiki pages
+
