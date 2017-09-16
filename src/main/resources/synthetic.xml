@@ -35,4 +35,11 @@
     <property name="pageText" category="input" />
   </type>
 
+  <type type="confluence.updateWikiPages" extends="confluence.Task">
+    <property name="spaceKey" category="input" />
+    <property name="pageIds" category="input" kind="list_of_string" />
+    <property name="pageTitle" category="input" />
+    <property name="pageText" category="input" />
+  </type>
+
 </synthetic>

@@ -14,14 +14,17 @@ HTTP_SUCCESS = sets.Set([200])
 class ConfluenceClient(object):
 
     def __init__(self, httpConnection, username=None, password=None):
+      print "Executing __init__() in ConfluenceClient\n"
       self.httpConnection = httpConnection
       self.httpRequest = HttpRequestPlus(httpConnection, username, password)
 
     @staticmethod
     def createClient(httpConnection, username=None, password=None):
+      print "Executing createClient() in ConfluenceClient\n"
       return ConfluenceClient(httpConnection, username, password)
 
     def addComment(self, pageId, comment):
+      print "Executing addComment() in ConfluenceClient\n"
       contentType = "application/json"
       headers = {'Accept' : 'application/json'}
       addCommentUrl = '/rest/api/content'
@@ -31,8 +34,10 @@ class ConfluenceClient(object):
       response = self.httpRequest.post(addCommentUrl, json.dumps(payload), contentType=contentType, headers=headers)
       if response.getStatus() not in HTTP_SUCCESS:
         self.throw_error(response)
+      print "Success.  The comment has been added to page %s.\n" % pageId
 
     def addPage(self, spaceKey, parentPageId, pageTitle, pageText):
+      print "Executing addPage() in ConfluenceClient\n"
       contentType = "application/json"
       headers = {'Accept' : 'application/json'}
       addPageUrl = '/rest/api/content'
@@ -44,8 +49,21 @@ class ConfluenceClient(object):
       response = self.httpRequest.post(addPageUrl, json.dumps(payload), contentType=contentType, headers=headers)
       if response.getStatus() not in HTTP_SUCCESS:
         self.throw_error(response)
+      print "Success.  The page %s has been added.\n" % pageTitle
+
+
+    def getPage(self, pageId):
+      print "Executing getPage() in ConfluenceClient\n"
+      contentType = "application/json"
+      headers = {'Accept' : 'application/json', 'Content-Type' : 'application/json'}
+      getPageUrl = '/rest/api/content/%s' % pageId
+      response = self.httpRequest.get(getPageUrl, contentType=contentType, headers=headers)
+      if response.getStatus() not in HTTP_SUCCESS:
+        self.throw_error(response)
+      return json.loads(response.response)
 
     def getPageNumbersByTitle(self, spaceKey, pageTitles):
+      print "Executing getPageNumbersByTitle() in ConfluenceClient\n"
       contentType = "application/json"
       headers = {'Accept' : 'application/json'}
       pageIdList = []
@@ -59,3 +77,23 @@ class ConfluenceClient(object):
           pageIdList.append(page['id'])
       return pageIdList
 
+    def updatePage(self, spaceKey, pageId, pageTitle, pageText):
+      print "Executing updatePage() in ConfluenceClient\n"
+      contentType = "application/json"
+      headers = {'Accept' : 'application/json', 'Content-Type' : 'application/json'}
+      newVersionNumber = self.getPage(pageId)['version']['number'] + 1
+      updatePageUrl = '/rest/api/content/%s' % pageId
+      payload = json.loads('{"type":"page", "title":"", "space":{"key":""}, "version":{"number":0}, "body":{"storage":{"representation":"storage","value":""}}}')
+      payload['title'] = pageTitle
+      payload['space']['key'] = spaceKey
+      payload['version']['number'] = newVersionNumber
+      payload['body']['storage']['value'] = pageText
+      response = self.httpRequest.put(updatePageUrl, json.dumps(payload), contentType=contentType, headers=headers)
+      if response.getStatus() not in HTTP_SUCCESS:
+        self.throw_error(response)
+      print "Success.  Page %s has been updated.\n" % pageId
+
+    def throw_error(self, response):
+      print "Error from Confluence, HTTP Return: %s\n" % (response.getStatus())
+      print response.response
+      sys.exit(1)

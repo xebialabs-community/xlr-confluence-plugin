@@ -1,4 +1,4 @@
-# xlr-confluence-plugin v1.0.1
+# xlr-confluence-plugin v1.0.4
 
 ### Functionality ###
 
@@ -9,6 +9,14 @@ A page with the given page title and page text will be added as a child page und
 The page text should be formatted with HTML tags.
 
 ![screenshot of add-page](images/addpage.png)
+
+#### Task: Update one or more wiki pages ####
+
+The specified pages will be updated with the new body text.  The new text will replace the prior contents of the page.
+
+The page text should be formatted with HTML tags.
+
+![screenshot of add-page](images/updatepage.png)
 
 #### Task: Add a comment to one or more existing wiki pages ####
 
