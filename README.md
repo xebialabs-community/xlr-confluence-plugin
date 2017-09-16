@@ -1,4 +1,16 @@
-# xlr-confluence-plugin v1.0.4
+# XL Release Confluence plugin #
+
+## CI status ##
+
+[![Build Status][xlr-confluence-plugin-travis-image]][xlr-confluence-plugin-travis-url]
+[![License: MIT][xlr-confluence-plugin-license-image]][xlr-confluence-plugin-license-url]
+![Github All Releases][xlr-confluence-plugin-downloads-image]
+
+[xlr-confluence-plugin-travis-image]: https://travis-ci.org/xebialabs-community/xlr-confluence-plugin.svg?branch=master
+[xlr-confluence-plugin-travis-url]: https://travis-ci.org/xebialabs-community/xlr-confluence-plugin
+[xlr-confluence-plugin-license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
+[xlr-confluence-plugin-license-url]: https://opensource.org/licenses/MIT
+[xlr-confluence-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-confluence-plugin/total.svg
 
 ### Functionality ###
 
