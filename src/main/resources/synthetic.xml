@@ -27,23 +27,31 @@
   <type type="confluence.addCommentToWikiPages" extends="confluence.Task">
     <property name="spaceKey" category="input" />
     <property name="pageTitles" category="input" kind="list_of_string" required="false" />
-    <property name="pageNumbers" category="input" kind="list_of_string" required="false" />
+    <property name="pageIds" category="input" kind="list_of_string" required="false" />
     <property name="comment" category="input" /> 
   </type>
 
   <type type="confluence.addWikiPages" extends="confluence.Task">
     <property name="spaceKey" category="input" />
     <property name="parentPageTitles" category="input" kind="list_of_string" required="false" />
-    <property name="parentPageNumbers" category="input" kind="list_of_string" required="false" />
-    <property name="pageTitle" category="input" />
-    <property name="pageText" category="input" />
+    <property name="parentPageIds" category="input" kind="list_of_string" required="false" />
+    <property name="newPageTitle" category="input" />
+    <property name="newPageText" category="input" />
+  </type>
+
+  <type type="confluence.deleteWikiPages" extends="confluence.Task">
+    <property name="spaceKey" category="input" />
+    <property name="pageTitles" category="input" kind="list_of_string" required="false" />
+    <property name="pageIds" category="input" kind="list_of_string" required="false" />
   </type>
 
   <type type="confluence.updateWikiPages" extends="confluence.Task">
     <property name="spaceKey" category="input" />
-    <property name="pageIds" category="input" kind="list_of_string" />
-    <property name="pageTitle" category="input" />
-    <property name="pageText" category="input" />
+    <property name="pageTitles" category="input" kind="list_of_string" required="false" />
+    <property name="pageIds" category="input" kind="list_of_string" required="false" />
+    <property name="newPageTitle" category="input" />
+    <property name="newPageText" category="input" />
   </type>
 
 </synthetic>
+

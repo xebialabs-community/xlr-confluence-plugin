@@ -22,19 +22,25 @@ The page text should be formatted with HTML tags.
 
 ![screenshot of add-page](images/addpage.png)
 
-#### Task: Update one or more wiki pages ####
-
-The specified pages will be updated with the new body text.  The new text will replace the prior contents of the page.
-
-The page text should be formatted with HTML tags.
-
-![screenshot of add-page](images/updatepage.png)
-
 #### Task: Add a comment to one or more existing wiki pages ####
 
 A comment will be added to all pages matching the page titles and page numbers within the space key.
 
 ![screenshot of add-comment](images/addcomment.png)
+
+#### Task: Delete one or more wiki pages ####
+
+The specified pages will be deleted.
+
+![screenshot of add-page](images/deletepage.png)
+
+#### Task: Update one or more wiki pages ####
+
+The specified pages will be updated with the new page title and new body text.  The prior contents of the page will be replaced.
+
+The page text should be formatted with HTML tags.
+
+![screenshot of add-page](images/updatepage.png)
 
 ### Server configuration ###
 

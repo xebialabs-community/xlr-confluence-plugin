@@ -13,7 +13,7 @@ import sys
 import com.xhaus.jyson.JysonCodec as json
 from confluence.HttpRequestPlus import HttpRequestPlus
 
-HTTP_SUCCESS = sets.Set([200])
+HTTP_SUCCESS = sets.Set([200, 204])
 
 class ConfluenceClient(object):
 
@@ -55,6 +55,15 @@ class ConfluenceClient(object):
         self.throw_error(response)
       print "Success.  The page %s has been added.\n" % pageTitle
 
+    def deletePage(self, spaceKey, pageId):
+      print "Executing deletePage() in ConfluenceClient\n"
+      contentType = "application/json"
+      headers = {'Accept' : 'application/json', 'Content-Type' : 'application/json'}
+      deletePageUrl = '/rest/api/content/%s' % pageId
+      response = self.httpRequest.delete(deletePageUrl, contentType=contentType, headers=headers)
+      if response.getStatus() not in HTTP_SUCCESS:
+        self.throw_error(response)
+      print "Success.  Page %s has been deleted.\n" % pageId
 
     def getPage(self, pageId):
       print "Executing getPage() in ConfluenceClient\n"
@@ -66,8 +75,8 @@ class ConfluenceClient(object):
         self.throw_error(response)
       return json.loads(response.response)
 
-    def getPageNumbersByTitle(self, spaceKey, pageTitles):
-      print "Executing getPageNumbersByTitle() in ConfluenceClient\n"
+    def getPageIdsByTitle(self, spaceKey, pageTitles):
+      print "Executing getPageIdsByTitle() in ConfluenceClient\n"
       contentType = "application/json"
       headers = {'Accept' : 'application/json'}
       pageIdList = []

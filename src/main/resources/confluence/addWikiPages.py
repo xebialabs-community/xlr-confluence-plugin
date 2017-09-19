@@ -20,10 +20,11 @@ credentials = CredentialsFallback(confluenceServer, username, password).getCrede
 
 confluenceClient = ConfluenceClientUtil.createConfluenceClient(confluenceServer, credentials['username'], credentials['password'])
 
-parentPageIdList = confluenceClient.getPageNumbersByTitle(spaceKey, parentPageTitles)
+parentPageIdList = confluenceClient.getPageIdsByTitle(spaceKey, parentPageTitles)
 
-for parentPageNumber in parentPageNumbers:
-  parentPageIdList.append(parentPageNumber)
+for parentPageId in parentPageIds:
+  parentPageIdList.append(parentPageId)
 
 for parentPageId in parentPageIdList:
-  confluenceClient.addPage(spaceKey, parentPageId, pageTitle, pageText)
+  confluenceClient.addPage(spaceKey, parentPageId, newPageTitle, newPageText)
+

@@ -10,7 +10,7 @@
 
 from confluence.ConfluenceClientUtil import ConfluenceClientUtil
 
-print "Executing addCommentToPages.py\n"
+print "Executing deleteWikiPages.py\n"
 
 if confluenceServer is None:
   print "No server provided\n"
@@ -26,5 +26,5 @@ for pageId in pageIds:
   pageIdList.append(pageId)
 
 for pageId in pageIdList:
-  confluenceClient.addComment(pageId, comment)
+  confluenceClient.deletePage(spaceKey, pageId)
 
