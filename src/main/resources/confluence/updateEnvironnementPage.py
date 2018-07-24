@@ -10,7 +10,7 @@
 
 from confluence.ConfluenceClientUtil import ConfluenceClientUtil
 
-print "Executing deleteWikiPages.py\n"
+print "Executing updateEnvironnementPage.py\n"
 
 if confluenceServer is None:
   print "No server provided\n"
@@ -20,11 +20,6 @@ credentials = CredentialsFallback(confluenceServer, username, password).getCrede
 
 confluenceClient = ConfluenceClientUtil.createConfluenceClient(confluenceServer, credentials['username'], credentials['password'])
 
-pageIdList = confluenceClient.getPageIdsByTitle(spaceKey, pageTitles)
-
-for pageId in pageIds:
-  pageIdList.append(pageId)
-
-for pageId in pageIdList:
-  confluenceClient.deletePage(spaceKey, pageId)
+pageTitles = [pageTitle]
+pageIdList = confluenceClient.updateEnvironnementPage(spaceKey, pageTitles, environment, version, application)
 

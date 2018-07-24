@@ -1,5 +1,5 @@
 #
-# Copyright 2017 XEBIALABS
+# Copyright 2018 XEBIALABS
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 #
@@ -90,6 +90,25 @@ class ConfluenceClient(object):
           pageIdList.append(page['id'])
       return pageIdList
 
+    def getPageHTMLByTitle(self, spaceKey, pageTitles):
+      print "Executing getPageHTMLByTitle() in ConfluenceClient\n"
+      pageID = self.getPageIdsByTitle(spaceKey, pageTitles)[0]
+      contentType = "application/json"
+      headers = {'Accept' : 'application/json'}
+      pageList = []
+      pageStr = ''
+      for pageTitle in pageTitles:
+        searchByPageTitleUrl = '/rest/api/content/' + pageID + '?expand=body.storage'
+        response = self.httpRequest.get(searchByPageTitleUrl, contentType=contentType, headers=headers, quotePlus=True)
+        if response.getStatus() not in HTTP_SUCCESS:
+          self.throw_error(response)
+        result = json.loads(response.response)
+        for page in result['body']['storage']['value']:
+          pageStr = pageStr + page
+
+      pageList.append(pageStr)
+      return pageList
+
     def updatePage(self, spaceKey, pageId, pageTitle, pageText):
       print "Executing updatePage() in ConfluenceClient\n"
       contentType = "application/json"
@@ -105,6 +124,40 @@ class ConfluenceClient(object):
       if response.getStatus() not in HTTP_SUCCESS:
         self.throw_error(response)
       print "Success.  Page %s has been updated.\n" % pageId
+
+    def updateEnvironnementPage(self, spaceKey, pageTitles, environment, version, application):
+      print "Executing updateEnvironnementPage() in ConfluenceClient\n"
+      pageID = self.getPageIdsByTitle(spaceKey, pageTitles)[0]
+      contentType = "application/json"
+      headers = {'Accept' : 'application/json'}
+      pageStr = ''
+      tmpPageStr = ''
+      appendbool = True
+      found = False
+      for pageTitle in pageTitles:
+        searchByPageTitleUrl = '/rest/api/content/' + pageID + '?expand=body.storage'
+        response = self.httpRequest.get(searchByPageTitleUrl, contentType=contentType, headers=headers, quotePlus=True)
+        if response.getStatus() not in HTTP_SUCCESS:
+          self.throw_error(response)
+        result = json.loads(response.response)
+        
+        for page in result['body']['storage']['value']:
+          if appendbool is True:
+            pageStr = pageStr + page
+            if environment in pageStr and found == False:
+              pageStr = pageStr + '</td><td>'+application+'</td><td>'+version+'</td>' 
+              appendbool = False
+              found = True
+
+          if appendbool is False and "</tr>" in tmpPageStr:
+            pageStr = pageStr + "</tr>"
+            appendbool = True
+          
+          if found is True:
+              tmpPageStr = tmpPageStr + page            
+      print "********* HTML PAGE > " + pageStr
+      self.updatePage(spaceKey, pageID, pageTitles[0], pageStr)
+
 
     def throw_error(self, response):
       print "Error from Confluence, HTTP Return: %s\n" % (response.getStatus())
