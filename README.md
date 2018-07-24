@@ -61,6 +61,18 @@ The page text should be formatted with HTML tags.
 
 ![screenshot of add-page](images/updatepage.png)
 
+### Task: Update confluence environment page
+
+Change the value in an HTML table containing a summary of what is installed on given environments.
+
+The key sought for the modificationd of the value is the name of the environment present in the table.
+
+### Task: Get HTML content
+
+Get the HTML code of a confluence page.
+
+
+
 ### Server configuration ###
 
 ![screenshot of configuration](images/config.png)
