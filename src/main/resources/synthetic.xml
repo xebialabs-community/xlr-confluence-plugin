@@ -53,15 +53,7 @@
     <property name="newPageText" category="input" />
   </type>
 
-  <type type="confluence.updateEnvironnementPage" extends="confluence.Task">
-    <property name="spaceKey" category="input" />
-    <property name="pageTitle" category="input" kind="string" required="true" />
-    <property name="environment" category="input" kind="string" required="true" />
-    <property name="version" category="input" kind="string" required="true"/>
-    <property name="application" category="input" kind="string" required="true"/>
-  </type>
-
-  <type type="confluence.getHTMLPageByTitle" extends="confluence.Task">
+  <type type="confluence.getHtmlPageByTitle" extends="confluence.Task">
     <property name="spaceKey" category="input" required="true" />
     <property name="pageTitle" category="input" kind="string" required="true" />
     <property name="htmlpage"     category="output"/>
