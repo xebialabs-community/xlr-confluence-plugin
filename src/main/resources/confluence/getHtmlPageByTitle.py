@@ -10,7 +10,7 @@
 
 from confluence.ConfluenceClientUtil import ConfluenceClientUtil
 
-print "Executing getHTMLPageByTitle.py\n"
+print "Executing getPageHtmlByTitle.py\n"
 
 if confluenceServer is None:
   print "No server provided\n"
@@ -21,7 +21,7 @@ credentials = CredentialsFallback(confluenceServer, username, password).getCrede
 confluenceClient = ConfluenceClientUtil.createConfluenceClient(confluenceServer, credentials['username'], credentials['password'])
 
 pageTitles = [pageTitle]
-pageIdList = confluenceClient.getPageHTMLByTitle(spaceKey, pageTitles)
+pageIdList = confluenceClient.getPageHtmlByTitle(spaceKey, pageTitles)
 
 htmlpage = pageIdList[0]
 

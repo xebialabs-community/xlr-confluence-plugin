@@ -90,8 +90,8 @@ class ConfluenceClient(object):
           pageIdList.append(page['id'])
       return pageIdList
 
-    def getPageHTMLByTitle(self, spaceKey, pageTitles):
-      print "Executing getPageHTMLByTitle() in ConfluenceClient\n"
+    def getPageHtmlByTitle(self, spaceKey, pageTitles):
+      print "Executing getPageHtmlByTitle() in ConfluenceClient\n"
       pageID = self.getPageIdsByTitle(spaceKey, pageTitles)[0]
       contentType = "application/json"
       headers = {'Accept' : 'application/json'}
@@ -125,15 +125,15 @@ class ConfluenceClient(object):
         self.throw_error(response)
       print "Success.  Page %s has been updated.\n" % pageId
 
-    def updateEnvironnementPage(self, spaceKey, pageTitles, environment, version, application):
-      print "Executing updateEnvironnementPage() in ConfluenceClient\n"
+    def updateEnvironmentPage(self, spaceKey, pageTitles, environment, version, application):
+      print "Executing updateEnvironmentPage() in ConfluenceClient\n"
       pageID = self.getPageIdsByTitle(spaceKey, pageTitles)[0]
       contentType = "application/json"
       headers = {'Accept' : 'application/json'}
       pageStr = ''
       tmpPageStr = ''
-      appendbool = True
-      found = False
+      bappend = True
+      bfound = False
       for pageTitle in pageTitles:
         searchByPageTitleUrl = '/rest/api/content/' + pageID + '?expand=body.storage'
         response = self.httpRequest.get(searchByPageTitleUrl, contentType=contentType, headers=headers, quotePlus=True)
@@ -142,18 +142,18 @@ class ConfluenceClient(object):
         result = json.loads(response.response)
         
         for page in result['body']['storage']['value']:
-          if appendbool is True:
+          if bappend:
             pageStr = pageStr + page
-            if environment in pageStr and found == False:
+            if environment in pageStr and not bfound:
               pageStr = pageStr + '</td><td>'+application+'</td><td>'+version+'</td>' 
               appendbool = False
-              found = True
+              bfound = True
 
-          if appendbool is False and "</tr>" in tmpPageStr:
+          if not bappend and "</tr>" in tmpPageStr:
             pageStr = pageStr + "</tr>"
             appendbool = True
           
-          if found is True:
+          if bfound:
               tmpPageStr = tmpPageStr + page            
       print "********* HTML PAGE > " + pageStr
       self.updatePage(spaceKey, pageID, pageTitles[0], pageStr)

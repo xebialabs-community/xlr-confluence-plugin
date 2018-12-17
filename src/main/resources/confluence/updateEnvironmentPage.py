@@ -10,7 +10,7 @@
 
 from confluence.ConfluenceClientUtil import ConfluenceClientUtil
 
-print "Executing updateEnvironnementPage.py\n"
+print "Executing updateEnvironmentPage.py\n"
 
 if confluenceServer is None:
   print "No server provided\n"
@@ -21,5 +21,5 @@ credentials = CredentialsFallback(confluenceServer, username, password).getCrede
 confluenceClient = ConfluenceClientUtil.createConfluenceClient(confluenceServer, credentials['username'], credentials['password'])
 
 pageTitles = [pageTitle]
-pageIdList = confluenceClient.updateEnvironnementPage(spaceKey, pageTitles, environment, version, application)
+pageIdList = confluenceClient.updateEnvironmentPage(spaceKey, pageTitles, environment, version, application)
 
