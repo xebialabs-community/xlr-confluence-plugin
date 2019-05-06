@@ -61,6 +61,14 @@ The page text should be formatted with HTML tags.
 
 ![screenshot of add-page](images/updatepage.png)
 
+
+### Task: Get HTML content
+
+Get the HTML code of a confluence page.
+
+![screenshot of get-html](images/get-html-page.png)
+
+
 ### Server configuration ###
 
 ![screenshot of configuration](images/config.png)

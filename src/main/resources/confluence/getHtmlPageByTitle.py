@@ -10,7 +10,7 @@
 
 from confluence.ConfluenceClientUtil import ConfluenceClientUtil
 
-print "Executing deleteWikiPages.py\n"
+print "Executing getPageHtmlByTitle.py\n"
 
 if confluenceServer is None:
   print "No server provided\n"
@@ -20,11 +20,8 @@ credentials = CredentialsFallback(confluenceServer, username, password).getCrede
 
 confluenceClient = ConfluenceClientUtil.createConfluenceClient(confluenceServer, credentials['username'], credentials['password'])
 
-pageIdList = confluenceClient.getPageIdsByTitle(spaceKey, pageTitles)
+pageTitles = [pageTitle]
+pageIdList = confluenceClient.getPageHtmlByTitle(spaceKey, pageTitles)
 
-for pageId in pageIds:
-  pageIdList.append(pageId)
-
-for pageId in pageIdList:
-  confluenceClient.deletePage(spaceKey, pageId)
+htmlpage = pageIdList[0]
 
