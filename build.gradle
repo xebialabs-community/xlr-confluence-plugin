@@ -2,10 +2,16 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
   id "com.github.hierynomus.license" version "0.14.0"
+  id "nebula.release" version "6.0.0"
   id "java"
 }
 
-version = "1.2.0"
+if (!project.hasProperty('release.scope')) {
+  project.ext['release.scope'] = 'patch'
+}
+if (!project.hasProperty('release.useLastTag')) {
+  project.ext['release.useLastTag'] = true
+}
 
 processResources.configure {
   filter ReplaceTokens, tokens: [
